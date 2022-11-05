@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block 'titulo'%}
+Cadastro
+
+{% endblock%}
+
+{% block 'body' %}
+<div class="container">
+    <br>
+    {% if status == '1' %}
+       <div class="alert alert-danger" role="alert">
+        Sua senha deve ter entre 8 e 12 carateres
+       </div>
+    {% endif %}
+
+    {% if status == '2' %}
+    <div class="alert alert-danger" role="alert">
+     Email e senha não podem ser vazios!
+    </div>
+    {% endif %}
+
+    {% if status == '3' %}
+    <div class="alert alert-danger" role="alert">
+     Email já existe!
+    </div>
+    {% endif %}
+
+    {% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+     Cadastro realizado com sucesso!
+    </div>
+    {% endif %}
+ 
+    <div class="row">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md">
+          <br>
+          <h1>Cadastre-se</h1>
+          <hr>
+          <form method="POST">
+            {% csrf_token %}
+
+            {{ form|crispy }}
+            
+            <div class="row">
+                <div class="col mb-4">
+                    <button type="submit" class='btn btn-primary btn-block btn-lg'>Cadastrar</button>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="col-md-3">
+
+      </div>
+  </div>
+
+</div>
+{% endblock %}
